@@ -1,0 +1,79 @@
+# Ignore Python virtual environment
+venv/
+env/
+.Python/
+pipenv/
+Pipfile.lock
+.python-version
+
+# Ignore IDE-specific files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Ignore database files
+*.sqlite3
+*.db
+
+# Ignore Python compiled files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Ignore static files (if collected)
+staticfiles/
+
+# Ignore media files
+media/
+
+# Ignore environment variables
+.env
+.env.local
+.env.*.local
+
+# Ignore macOS-specific files
+.DS_Store
+
+# Ignore pytest cache
+.pytest_cache/
+
+# Ignore coverage reports
+.coverage
+htmlcov/
+
+# Ignore Celery files
+celerybeat-schedule
+celerybeat.pid
+
+# Ignore PyCharm files
+.idea/
+*.iml
+
+# Ignore Jupyter Notebook files
+*.ipynb
+.ipynb_checkpoints/
+
+# Ignore npm and node_modules (if using frontend tools)
+node_modules/
+npm-debug.log*
+
+# Ignore compiled static files (if using collectstatic)
+static/
+
+# Ignore local development settings
+settings/local.py
+settings/dev.py
+
+# Ignore migrations (optional, but recommended for shared projects)
+migrations/
+
+# Ignore log files
+*.log
+logs/
+
+# Ignore cache files
+*.cache
+
+# Ignore pytest files
+.pytest_cache/

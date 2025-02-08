@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Sign Up - Winkel{% endblock %}
+
+{% block content %}
+    <div class="hero-wrap hero-bread" style="background-image: url({% static 'images/bg_6.jpg' %});">
+      <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+          <div class="col-md-9 ftco-animate text-center">
+          	<p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Sign Up</span></p>
+            <h1 class="mb-0 bread">Join Us</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="ftco-section contact-section bg-light">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-md-8 ftco-animate">
+            <form action="{% url 'signup' %}" method="POST" class="p-5 bg-white">
+              {% csrf_token %}
+              <div class="row">
+                {% if form.errors %}
+                  <div class="col-md-12">
+                    <div class="alert alert-danger" role="alert">
+                      {% for field in form %}
+                        {% for error in field.errors %}
+                          <p>{{ error }}</p>
+                        {% endfor %}
+                      {% endfor %}
+                    </div>
+                  </div>
+                {% endif %}
+
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" name="username" class="form-control" required>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" class="form-control" required>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="password1">Password</label>
+                    <input type="password" name="password1" class="form-control" required>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="password2">Confirm Password</label>
+                    <input type="password" name="password2" class="form-control" required>
+                  </div>
+                </div>
+                <div class="col-md-12 mt-4">
+                  <div class="form-group">
+                    <input type="submit" value="Create Account" class="btn btn-primary py-3 px-5">
+                  </div>
+                </div>
+              </div>
+            </form>
+
+            <div class="row mt-4">
+              <div class="col text-center">
+                <p>Already have an account? <a href="{% url 'login' %}">Login here</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+{% endblock %}
