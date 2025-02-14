@@ -21,16 +21,16 @@
           <div class="col-md-8 ftco-animate">
             {% if form.errors %}
               <div class="alert alert-danger" role="alert">
-                Invalid username or password. Please try again.
+                Invalid email or password. Please try again.
               </div>
             {% endif %}
             
-            <form action="{% url 'login' %}" method="POST" class="p-5 bg-white">
+            <form action="{% url 'loginuser' %}" method="POST" class="p-5 bg-white">
               {% csrf_token %}
               <div class="row align-items-end">
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label for="username">Username</label>
+                    <label for="email">Username</label>
                     <input type="text" name="username" class="form-control" required>
                   </div>
                 </div>

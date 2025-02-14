@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-
+{% load widget_tweaks %}
 {% block title %}Sign Up - Winkel{% endblock %}
 
 {% block content %}
@@ -17,62 +17,88 @@
 
     <section class="ftco-section contact-section bg-light">
       <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-md-8 ftco-animate">
-            <form action="{% url 'signup' %}" method="POST" class="p-5 bg-white">
-              {% csrf_token %}
-              <div class="row">
-                {% if form.errors %}
-                  <div class="col-md-12">
-                    <div class="alert alert-danger" role="alert">
-                      {% for field in form %}
-                        {% for error in field.errors %}
-                          <p>{{ error }}</p>
-                        {% endfor %}
-                      {% endfor %}
-                    </div>
-                  </div>
-                {% endif %}
-
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="username">Username</label>
-                    <input type="text" name="username" class="form-control" required>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" name="email" class="form-control" required>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="password1">Password</label>
-                    <input type="password" name="password1" class="form-control" required>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="password2">Confirm Password</label>
-                    <input type="password" name="password2" class="form-control" required>
-                  </div>
-                </div>
-                <div class="col-md-12 mt-4">
-                  <div class="form-group">
-                    <input type="submit" value="Create Account" class="btn btn-primary py-3 px-5">
-                  </div>
-                </div>
+          <div class="row justify-content-center">
+              <div class="col-md-8 ftco-animate">
+                  <form action="{% url 'signupuser' %}" method="POST" class="p-5 bg-white">
+                      {% csrf_token %}
+                      
+                      {% if form.errors %}
+                          <div class="alert alert-danger">
+                              {% for field in form %}
+                                  {% for error in field.errors %}
+                                      <p>{{ error }}</p>
+                                  {% endfor %}
+                              {% endfor %}
+                              {% if form.non_field_errors %}
+                                  {% for error in form.non_field_errors %}
+                                      <p>{{ error }}</p>
+                                  {% endfor %}
+                              {% endif %}
+                          </div>
+                      {% endif %}
+  
+                      <div class="row">
+                          <div class="col-md-6">
+                              <div class="form-group">
+                                  <label for="{{ form.username.id_for_label }}">Username</label>
+                                  {{ form.username|add_class:"form-control" }}
+                                  {% if form.username.errors %}
+                                      <div class="text-danger">
+                                          {% for error in form.username.errors %}
+                                              {{ error }}
+                                          {% endfor %}
+                                      </div>
+                                  {% endif %}
+                              </div>
+                          </div>
+                          <div class="col-md-6">
+                              <div class="form-group">
+                                  <label for="{{ form.email.id_for_label }}">Email</label>
+                                  {{ form.email|add_class:"form-control" }}
+                                  {% if form.email.errors %}
+                                      <div class="text-danger">
+                                          {% for error in form.email.errors %}
+                                              {{ error }}
+                                          {% endfor %}
+                                      </div>
+                                  {% endif %}
+                              </div>
+                          </div>
+                          <div class="col-md-6">
+                              <div class="form-group">
+                                  <label for="{{ form.password1.id_for_label }}">Password</label>
+                                  {{ form.password1|add_class:"form-control" }}
+                                  {% if form.password1.errors %}
+                                      <div class="text-danger">
+                                          {% for error in form.password1.errors %}
+                                              {{ error }}
+                                          {% endfor %}
+                                      </div>
+                                  {% endif %}
+                              </div>
+                          </div>
+                          <div class="col-md-6">
+                              <div class="form-group">
+                                  <label for="{{ form.password2.id_for_label }}">Confirm Password</label>
+                                  {{ form.password2|add_class:"form-control" }}
+                                  {% if form.password2.errors %}
+                                      <div class="text-danger">
+                                          {% for error in form.password2.errors %}
+                                              {{ error }}
+                                          {% endfor %}
+                                      </div>
+                                  {% endif %}
+                              </div>
+                          </div>
+                          <div class="col-md-12 mt-4">
+                              <div class="form-group">
+                                  <input type="submit" value="Create Account" class="btn btn-primary py-3 px-5">
+                              </div>
+                          </div>
+                      </div>
+                  </form>
               </div>
-            </form>
-
-            <div class="row mt-4">
-              <div class="col text-center">
-                <p>Already have an account? <a href="{% url 'login' %}">Login here</a></p>
-              </div>
-            </div>
           </div>
-        </div>
       </div>
-    </section>
+  </section>
 {% endblock %}
