@@ -17,6 +17,9 @@ class UserProfile(models.Model):
     username = models.CharField(max_length=255, blank=True)
     email = models.EmailField(unique=True, blank=True, null=True)
     bio = models.TextField(blank=True)
+    first_name = models.CharField(max_length=255, blank=True)
+    last_name = models.CharField(max_length=255, blank=True)
+    address = models.TextField(blank=True)
     profile_picture = models.ImageField(upload_to='profile_pics/', blank=True)
     token = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     wallet_balance = models.DecimalField(
@@ -39,6 +42,15 @@ class UserProfile(models.Model):
     class Meta:
         verbose_name = 'User Profile'
         verbose_name_plural = 'User Profiles'
+        
+    def save(self, *args, **kwargs):
+        # Update profile fields from User model
+        if self.user:
+            self.first_name = self.user.first_name
+            self.last_name = self.user.last_name
+            self.email = self.user.email
+            self.username = self.user.username
+        super().save(*args, **kwargs)    
 
 # Signal to automatically create or update UserProfile when User is created/updated
 # @receiver(post_save, sender=User)

@@ -19,10 +19,12 @@
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-md-8 ftco-animate">
-            {% if form.errors %}
-              <div class="alert alert-danger" role="alert">
-                Invalid email or password. Please try again.
-              </div>
+            {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-danger {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+                    {{ message }}
+                </div>
+            {% endfor %}
             {% endif %}
             
             <form action="{% url 'loginuser' %}" method="POST" class="p-5 bg-white">
